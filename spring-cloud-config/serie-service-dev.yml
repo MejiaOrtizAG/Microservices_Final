@@ -1,0 +1,27 @@
+server:
+  port: 8084
+
+spring:
+  rabbitmq:
+    username: guest
+    password: guest
+    host: rabbitmq
+    port: 5672
+  data:
+    mongodb:
+      authentication-database: admin
+      username: rootuser
+      password: rootpass
+      database: final_series
+      port: 27017
+      host: mongo-serie
+
+queue:
+  serie:
+    name: Serie
+
+info:
+  app:
+    name: ${spring.application.name}
+    description: Serie Service Management
+    version: 1.0.0

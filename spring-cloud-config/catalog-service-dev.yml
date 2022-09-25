@@ -1,0 +1,59 @@
+server:
+  port: 8086
+
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1;
+    username: sa
+    password: sa
+    sql:
+      init:
+        data-locations: classpath:catalog.sql
+    jpa:
+      defer-datasource-initialization: true
+      hibernate:
+        ddl-auto: create-drop
+  rabbitmq:
+    username: guest
+    password: guest
+    host: rabbitmq
+    port: 5672
+  data:
+    mongodb:
+      authentication-database: admin
+      username: rootuser
+      password: rootpass
+      database: final_catalogs
+      port: 27017
+      host: mongo-catalog
+
+queue:
+  serie:
+    name: Serie
+  movie:
+    name: Movie
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      catalog:
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 5
+        failureRateThreshold: 50
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 15000
+        permittedNumberOfCallsInHalfOpenState: 3
+        registerHealthIndicator: true
+        allowHealthIndicatorToFail: false
+
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+
+info:
+  app:
+    name: ${spring.application.name}
+    description: Catalog Service Management
+    version: 1.1.0

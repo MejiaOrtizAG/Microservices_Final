@@ -1,0 +1,29 @@
+server:
+  port: 8082
+
+spring:
+  rabbitmq:
+    username: guest
+    password: guest
+    host: rabbitmq
+    port: 5672
+  datasource:
+    url: jdbc:mysql://mysqldb:3306/Movie
+    username: root
+    password: rootpass
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+queue:
+  movie:
+    name: Movie
+
+info:
+  app:
+    name: ${spring.application.name}
+    description: Movie Service Management
+    version: 1.0.0

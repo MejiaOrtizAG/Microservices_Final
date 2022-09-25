@@ -1,0 +1,28 @@
+server:
+  port: 8761
+
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+
+spring:
+  application:
+    name: eureka-service
+  zipkin:
+    enabled: true
+    baseUrl: http://zipkin:9411
+
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+info:
+  app:
+    name: eureka-service
+    description: Eureka service Management
+    version: 1.0.0

@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: serie-service
+  cloud:
+    config:
+      fail-fast: true
+      discovery:
+        enabled: true
+        service-id: config-service
+  profiles:
+    active: dev
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-service:8761/eureka
